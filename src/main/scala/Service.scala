@@ -1,5 +1,6 @@
 import Service.{Request, Result, StringAdditional}
 
+import scala.annotation.tailrec
 import scala.concurrent.ExecutionContextExecutor
 
 class Service(implicit executionContext: ExecutionContextExecutor) {
@@ -8,6 +9,7 @@ class Service(implicit executionContext: ExecutionContextExecutor) {
     str => str.splitByComma.map(_.trim).map(_.toInt)
   }
 
+  @tailrec
   private def findNumbers(seq: Seq[Int], sum: => Int, result: Seq[Seq[Int]] = Seq()): Seq[Seq[Int]] = {
     lazy val first = seq.head
     val other = seq.tail
