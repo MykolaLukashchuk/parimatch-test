@@ -19,9 +19,9 @@ class Service(implicit executionContext: ExecutionContextExecutor) {
     )
   }
 
-  def processData(request: Option[Request]): Option[Result] = {
+  def processData(request: Request): Option[Result] = {
    for {
-     (sum, data) <- request
+     (sum, data) <- Some(request)
      boundData = bindInput(data)
      result = boundData.map(findNumbers(_, sum))
    } yield {

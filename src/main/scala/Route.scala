@@ -13,7 +13,7 @@ class Routes(implicit service: Service, executionContext: ExecutionContext) exte
         post {
           entity(as[String]) { data =>
             try {
-              val responseBody = service.processData(Some((sum, data))).map(r => s"$r").get
+              val responseBody = service.processData((sum, data)).map(r => s"$r").get
               complete(StatusCodes.OK, responseBody)
             } catch {
               case ex: NumberFormatException => complete(
